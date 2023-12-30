@@ -38,8 +38,16 @@ function initialSetup(indiv){
         x: indivSampleValues.slice(0,10).reverse(),
         y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
         text: indivSampleLabels.slice(0,10).reverse(),
+        type:'bar',
+        orientation:'h',
     }];
-    Plotly.newPlot('bar', barChart);
+
+    let barChartLayout = [{
+        title: 'Top 10 Sample Values',
+        xaxis: {title: 'Samples'},
+        yaxis: {title:'OTU IDs'},
+    }]
+    Plotly.newPlot('bar', barChart, barChartLayout);
 
     //Creating the Bubble Chart
     let bubbleChart = [{
@@ -51,17 +59,15 @@ function initialSetup(indiv){
             size:indivSampleValues,
             color:indivSampleIds,
         },
-
     }];
-    Plotly.newPlot('bubble',bubbleChart);
+    
+    let bubbleChartLayout = [{
+        title: 'Sample Values vs OTU IDs',
+        xaxis: {title:'OTU IDs'},
+        yaxis: {title:'Sample Values'}
+    }]
 
-    //Creating the Gauge Chart
-    let gaugeChart = [{
-        value: indivMetaData.wfreq,
-        type:'indicator',
-        mode:'gauge+number',
-    }];
-    Plotly.plot('gauge',gaugeChart);
+    Plotly.newPlot('bubble',bubbleChart,bubbleChartLayout);
 };
 
 function setMetaData(indiv){
@@ -98,11 +104,6 @@ function chartUpdate(indiv){
         'marker.color':[indivSampleIds],
     };
     Plotly.restyle('bubble',bubblechartUpdate);
-
-    let gaugeChartUpdate = {
-        value:indivMetaData.wfreq,
-    };
-    Plotly.restyle('gauge', gaugeChartUpdate);
 };
 
 function optionChanged(value){
