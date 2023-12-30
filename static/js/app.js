@@ -83,7 +83,7 @@ function chartUpdate(indiv){
     let indivSampleLabels = indivData.otu_labes;
 
     let barChartUpdate = {
-        x:[indivSampleValues.slice(0,10).reverse()];
+        x:[indivSampleValues.slice(0,10).reverse()],
         y:[indivSampleIds.slice(0,10).map(ids=>`OTU ${ids}`).reverse()],
         text:[indivSampleLabels.slice(0,10).reverse()],
     };
@@ -110,6 +110,6 @@ function optionChanged(value){
     setMetaData(value);
     chartUpdate(value);
     };
-    
+
 //launch the charts
 initialize();
