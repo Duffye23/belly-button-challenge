@@ -32,13 +32,14 @@ function initialSetup(indiv){
     let indivSampleValues = indivData.sample_values;
     let indivSampleLabels = indivData.otu_labels;
 
+    
     //Creating the Bar Chart
     let barChart = [{
         x: indivSampleValues.slice(0,10).reverse(),
         y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
         text: indivSampleLabels.slice(0,10).reverse(),
     }];
-    Plotly.newPlot('bar', barChart, config);
+    Plotly.newPlot('bar', barChart);
 
     //Creating the Bubble Chart
     let bubbleChart = [{
@@ -52,7 +53,7 @@ function initialSetup(indiv){
         },
 
     }];
-    Plotly.newPlot('bubble',bubbleChart,config);
+    Plotly.newPlot('bubble',bubbleChart);
 
     //Creating the Gauge Chart
     let gaugeChart = [{
@@ -60,7 +61,7 @@ function initialSetup(indiv){
         type:'indicator',
         mode:'gauge+number',
     }];
-    Plotly.plot('gauge',gaugeChart,config);
+    Plotly.plot('gauge',gaugeChart);
 };
 
 function setMetaData(indiv){
