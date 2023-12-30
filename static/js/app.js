@@ -35,8 +35,12 @@ function initialSetup(indiv){
     
     //Creating the Bar Chart
     let barChart = [{
-        x: indivSampleValues.slice(0,10).reverse(),
-        y: indivSampleIds.slice(0,10).reverse().map(ids=> `OTU #{ids}`),
+        let xVal: indivSampleValues.slice(0,10).reverse();
+        let yVal: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse();
+        let textVal
+
+        x: ,
+        y: ,
         text: indivSampleLabels.slice(0,10).reverse(),
         name:'Taxa',
         type:'bar',
@@ -46,7 +50,7 @@ function initialSetup(indiv){
     let barChartLayout = [{
         title: 'Top 10 Sample Values',
         xaxis: {title: 'Samples', fixedrange:true},
-        yaxis: {title:'OTU IDs'}, fixedrange:true,
+        yaxis: {title:'OTU IDs', fixedrange:true},
     }];
     Plotly.newPlot('bar', [barChart], barChartLayout);
 
