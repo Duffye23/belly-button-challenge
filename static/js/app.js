@@ -36,7 +36,7 @@ function initialSetup(indiv){
     //Creating the Bar Chart
     let barChart = [{
         x: indivSampleValues.slice(0,10).reverse(),
-        y: indivSampleIds.slice(0,10).reverse(),
+        y: indivSampleIds.slice(0,10).reverse().map(ids=> `OTU #{ids}`),
         text: indivSampleLabels.slice(0,10).reverse(),
         name:'Taxa',
         type:'bar',
@@ -45,8 +45,8 @@ function initialSetup(indiv){
 
     let barChartLayout = [{
         title: 'Top 10 Sample Values',
-        xaxis: {title: 'Samples'},
-        yaxis: {title:'OTU IDs'},
+        xaxis: {title: 'Samples', fixedrange:true},
+        yaxis: {title:'OTU IDs'}, fixedrange:true,
     }];
     Plotly.newPlot('bar', barChart, barChartLayout);
 
@@ -65,8 +65,9 @@ function initialSetup(indiv){
     let bubbleChartLayout = [{
         title: 'Sample Values vs OTU IDs',
         xaxis: {title:'OTU IDs'},
-        yaxis: {title:'Sample Values'}
-    }]
+        yaxis: {title:'Sample Values'},
+
+    }];
 
     Plotly.newPlot('bubble',bubbleChart,bubbleChartLayout);
 };
@@ -78,7 +79,7 @@ function setMetaData(indiv){
     //We need to update the metaData so that we can use the new values when needed.
     //This is done by refreshing the <p> elements
     metaDataDiv.selectAll('p').remove();
-    metaDataDiv.selectAll('p').data(Object.entries(indivMetaData)).enter().append('p').text(d=>`${d[1]}`);
+    metaDataDiv.selectAll('p').data(Object.entries(indivMetaData)).enter().append('p').text(d=>`${d[0]}:${d[1]}`);
 };
 
 function chartUpdate(indiv){
