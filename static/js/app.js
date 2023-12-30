@@ -72,6 +72,42 @@ function setMetaData(indiv){
     metaDataDiv.selectAll('p').remove();
     metaDataDiv.selectAll('p').data(Object.entries(indivMetaData)).enter().append('p').text(d=>`${d[1]}`);
 };
+function chartUpdate(indiv){
+    let indivData = sampleSamples.filter(sample=>(sample.id==indiv.toString()))[0];
+    let indivMetaData = sampleMetadata.filter(meta=>(meta.id==indiv))[0];
+
+    let indivSampleIds = indivData.otu_ids;
+    let indivSampleValues = indivData.sample_values;
+    let indivSampleLabels = indivData.otu_labes;
+
+    let barChartUpdate = {
+        x:[indivSampleValues.slice(0,10).reverse()];
+        y:[indivSampleIds.slice(0,10).map(ids=>`OTU ${ids}`).reverse()],
+        text:[indivSampleLabels.slice(0,10).reverse()],
+    };
+    console.log(barChartUpdate);
+    Plotly.restyle('bar',barChartUpdate);
+
+    let bubblechartUpdate = {
+        x:[indivSampleIds],
+        y:[indivSampleValues],
+        text:[indivSampleLabels],
+        'marker.size':[indivSampleValues],
+        'marker.color':[indivSampleIds],
+    };
+    Plotly.restyle('bubble',bubblechartUpdate);
+
+    let gaugeChartUpdate = {
+        value:indivMetaData.wfreq,
+    };
+    Plotly.restyle('gauge', gaugeChartUpdate);
+};
+
+function change(value){
+    console.log('Value Changed to:', value);
+    setMetaData(value);
+    chartUpdate(value);
+};
 
 //launch the charts
 init();
