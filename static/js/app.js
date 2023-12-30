@@ -45,6 +45,12 @@ function initialSetup(indiv){
         x:indivSampleIds,
         y:indivSampleValues,
         text:indivSampleLabels,
+        mode:'markers',
+        marker:{
+            size:indivSampleValues,
+            color:indivSampleIds,
+        },
+
     }];
     Plotly.newPlot('bubble',bubbleChart,config);
 
