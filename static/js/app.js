@@ -21,7 +21,7 @@ function initialize(){
 }
 
 function initialSetup(indiv){
-    let indivData = sampleSamples.filter(sample => (sample.id == indiv.toString())) [0];
+    let indivData = sampleSamples.filter(sample => (sample.id == indiv.toString()))[0];
     let indivMetaData = sampleMetadata.filter(meta => (meta.id == indiv))[0];
 
     //setting the individual metaData
