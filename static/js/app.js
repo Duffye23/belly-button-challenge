@@ -93,7 +93,23 @@ function chartUpdate(indiv){
     let bubblechartUpdate = {
         x:[indivSampleIds],
         y:[indivSampleValues],
+        text:[indivSampleLabels],
+        'marker.size':[indivSampleValues],
+        'marker.color':[indivSampleIds],
     };
+    Plotly.restyle('bubble',bubblechartUpdate);
+
+    let gaugeChartUpdate = {
+        value:indivMetaData.wfreq,
+    };
+    Plotly.restyle('gauge', gaugeChartUpdate);
 };
+
+function optionChanged(value){
+    console.log('Value Changed to:', value);
+    setMetaData(value);
+    chartUpdate(value);
+    };
+    
 //launch the charts
 initialize();
