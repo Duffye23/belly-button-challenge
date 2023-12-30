@@ -65,7 +65,7 @@ function initialSetup(indiv){
 };
 
 function setMetaData(indiv){
-    let indivMetaData = sampleMetadata.fliter(meta=>(meta.id==indiv))[0];
+    let indivMetaData = sampleMetadata.filter(meta=>(meta.id==indiv))[0];
     let metaDataDiv = d3.select('#sample-metadata');
 
     //We need to update the metaData so that we can use the new values when needed.
