@@ -28,7 +28,7 @@ function initialSetup(indiv){
     setMetaData(indiv);
 
     //creating charts
-    let indivSampleIds = indivData.otu._ids;
+    let indivSampleIds = indivData.otu_ids;
     let indivSampleValues = indivData.sample_values;
     let indivSampleLabels = indivData.otu_labels;
 
