@@ -12,7 +12,7 @@ function initialize(){
 
         //Initialize our dropdown, we are inserting our sample values
         let dropDownButton = d3.select('#selDataset');
-        for (1=0; i<sampleNames.length; i++){
+        for (i=0; i<sampleNames.length; i++){
             dropDownButton.append('option').text(sampleNames[i]).attr('value',sampleNames[i])
         }
         //940 is the first record in samples.json
