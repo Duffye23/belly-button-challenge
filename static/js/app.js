@@ -64,7 +64,7 @@ function initialSetup(indiv){
 };
 
 function setMetaData(indiv){
-    let indivMetaData = sampleMetadata.fliter(meta=>(meta.id==indiv))[0];
+    let indivMetaData = sampleMetadata.filter(meta=>(meta.id==indiv))[0];
     let metaDataDiv = d3.select('#sample-metadata');
 };
 //launch the charts
