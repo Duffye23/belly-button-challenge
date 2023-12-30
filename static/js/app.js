@@ -57,6 +57,15 @@ function initialSetup(indiv){
     Plotly.plot('gauge',gaugeChart,config);
 }
 
+function setMetaData(indiv){
+    let indivMetaData = sampleMetadata.fliter(meta=>(meta.id==indiv))[0];
+    let metaDataDiv = d3.select('#sample-metadata');
+
+    //We need to update the metaData so that we can use the new values when needed.
+    //This is done by refreshing the <p> elements
+    metaDataDiv.selectAll('p').remove();
+    metaDataDiv.selectAll('p').data(Object.entries(indivMetaData)).enter().append('p').text(d=>`${d[1]}`);
+};
 
 //launch the charts
 init();
