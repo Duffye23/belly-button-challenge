@@ -35,9 +35,9 @@ function initialSetup(indiv){
     
     //Creating the Bar Chart
     let barChart = [{
-        x: indivSampleValues,//.slice(0,10).reverse(),
-        y: indivSampleIds,//.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
-        text: indivSampleLabels,//.slice(0,10).reverse(),
+        x: indivSampleValues.slice(0,10),//.reverse(),
+        y: indivSampleIds.slice(0,10),//.map(ids=> `OTU #{ids}`).reverse(),
+        text: indivSampleLabels.slice(0,10),//.reverse(),
         name:'Taxa',
         type:'bar',
         orientation:'h',
