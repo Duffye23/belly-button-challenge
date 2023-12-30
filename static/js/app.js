@@ -4,7 +4,7 @@ let sampleNames;
 let sampleMetadata;
 let sampleSamples;
 
-function initialDropDown(){
+function initialize(){
     d3.json(url).then(function(data){
         sampleNames = data.names;
         sampleMetadata = data.metadata;
@@ -34,9 +34,9 @@ function initialSetup(indiv){
 
     //Creating the Bar Chart
     let barChart = [{
-        x:indivSampleValues.slice(0,10).reverse(),
-        y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
-        text: indivSampleLabels.slice(0,10).reverse(),
+        x: indivSampleValues,
+        y: indivSampleIds,
+        text: indivSampleLabels
     }];
     Plotly.newPlot('bar', barChart, config);
 
@@ -45,12 +45,6 @@ function initialSetup(indiv){
         x:indivSampleIds,
         y:indivSampleValues,
         text:indivSampleLabels,
-        mode:'markers',
-        marker:{
-            size:indivSampleValues,
-            color:indivSampleIds,
-        },
-
     }];
     Plotly.newPlot('bubble',bubbleChart,config);
 
@@ -62,52 +56,5 @@ function initialSetup(indiv){
     }];
     Plotly.plot('gauge',gaugeChart,config);
 }
-
-function setMetaData(indiv){
-    let indivMetaData = sampleMetadata.fliter(meta=>(meta.id==indiv))[0];
-    let metaDataDiv = d3.select('#sample-metadata');
-
-    //We need to update the metaData so that we can use the new values when needed.
-    //This is done by refreshing the <p> elements
-    metaDataDiv.selectAll('p').remove();
-    metaDataDiv.selectAll('p').data(Object.entries(indivMetaData)).enter().append('p').text(d=>`${d[1]}`);
-};
-function chartUpdate(indiv){
-    let indivData = sampleSamples.filter(sample=>(sample.id==indiv.toString()))[0];
-    let indivMetaData = sampleMetadata.filter(meta=>(meta.id==indiv))[0];
-
-    let indivSampleIds = indivData.otu_ids;
-    let indivSampleValues = indivData.sample_values;
-    let indivSampleLabels = indivData.otu_labes;
-
-    let barChartUpdate = {
-        x:[indivSampleValues.slice(0,10).reverse()];
-        y:[indivSampleIds.slice(0,10).map(ids=>`OTU ${ids}`).reverse()],
-        text:[indivSampleLabels.slice(0,10).reverse()],
-    };
-    console.log(barChartUpdate);
-    Plotly.restyle('bar',barChartUpdate);
-
-    let bubblechartUpdate = {
-        x:[indivSampleIds],
-        y:[indivSampleValues],
-        text:[indivSampleLabels],
-        'marker.size':[indivSampleValues],
-        'marker.color':[indivSampleIds],
-    };
-    Plotly.restyle('bubble',bubblechartUpdate);
-
-    let gaugeChartUpdate = {
-        value:indivMetaData.wfreq,
-    };
-    Plotly.restyle('gauge', gaugeChartUpdate);
-};
-
-function change(value){
-    console.log('Value Changed to:', value);
-    setMetaData(value);
-    chartUpdate(value);
-};
-
 //launch the charts
-init();
+initialize();
