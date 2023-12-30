@@ -34,9 +34,9 @@ function initialSetup(indiv){
 
     //Creating the Bar Chart
     let barChart = [{
-        x: indivSampleValues,
-        y: indivSampleIds,
-        text: indivSampleLabels
+        x: indivSampleValues.slice(0,10).reverse(),
+        y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
+        text: indivSampleLabels.slice(0,10).reverse(),
     }];
     Plotly.newPlot('bar', barChart, config);
 
@@ -45,6 +45,12 @@ function initialSetup(indiv){
         x:indivSampleIds,
         y:indivSampleValues,
         text:indivSampleLabels,
+        mode:'markers',
+        marker:{
+            size:indivSampleValues,
+            color:indivSampleIds,
+        },
+
     }];
     Plotly.newPlot('bubble',bubbleChart,config);
 
@@ -55,6 +61,11 @@ function initialSetup(indiv){
         mode:'gauge+number',
     }];
     Plotly.plot('gauge',gaugeChart,config);
-}
+};
+
+function setMetaData(indiv){
+    let indivMetaData = sampleMetadata.fliter(meta=>(meta.id==indiv))[0];
+    let metaDataDiv = d3.select('#sample-metadata');
+};
 //launch the charts
 initialize();
