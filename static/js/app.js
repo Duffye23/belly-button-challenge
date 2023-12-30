@@ -35,14 +35,9 @@ function initialSetup(indiv){
     
     //Creating the Bar Chart
     let barChart = [{
-        let xVal: indivSampleValues.slice(0,10).reverse();
-        let yVal: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse();
-        let textVal
-
-        x: ,
-        y: ,
+        x: indivSampleValues.slice(0,10).reverse(),
+        y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
         text: indivSampleLabels.slice(0,10).reverse(),
-        name:'Taxa',
         type:'bar',
         orientation:'h',
     }];
@@ -50,9 +45,9 @@ function initialSetup(indiv){
     let barChartLayout = [{
         title: 'Top 10 Sample Values',
         xaxis: {title: 'Samples', fixedrange:true},
-        yaxis: {title:'OTU IDs', fixedrange:true},
+        yaxis: {title:'OTU IDs'}, fixedrange:true,
     }];
-    Plotly.newPlot('bar', [barChart], barChartLayout);
+    Plotly.newPlot('bar', barChart, barChartLayout);
 
     //Creating the Bubble Chart
     let bubbleChart = [{
