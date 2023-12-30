@@ -27,7 +27,7 @@ function initialSetup(indiv){
     //setting the individual metaData
     setMetaData(indiv);
 
-    //creating charts
+    //creating variables for our charts
     let indivSampleIds = indivData.otu_ids;
     let indivSampleValues = indivData.sample_values;
     let indivSampleLabels = indivData.otu_labels;
@@ -38,6 +38,7 @@ function initialSetup(indiv){
         x: indivSampleValues.slice(0,10).reverse(),
         y: indivSampleIds.slice(0,10).map(ids=> `OTU #{ids}`).reverse(),
         text: indivSampleLabels.slice(0,10).reverse(),
+        name:'Taxa',
         type:'bar',
         orientation:'h',
     }];
@@ -46,7 +47,7 @@ function initialSetup(indiv){
         title: 'Top 10 Sample Values',
         xaxis: {title: 'Samples'},
         yaxis: {title:'OTU IDs'},
-    }]
+    }];
     Plotly.newPlot('bar', barChart, barChartLayout);
 
     //Creating the Bubble Chart
