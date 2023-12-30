@@ -48,7 +48,7 @@ function initialSetup(indiv){
         xaxis: {title: 'Samples', fixedrange:true},
         yaxis: {title:'OTU IDs'}, fixedrange:true,
     }];
-    Plotly.newPlot('bar', barChart, barChartLayout);
+    Plotly.newPlot('bar', [barChart], barChartLayout);
 
     //Creating the Bubble Chart
     let bubbleChart = [{
